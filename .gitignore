@@ -1,0 +1,43 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+vendor/
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Uploads
+uploads/
+/uploads/*
+!uploads/.gitkeep
+
+# Session files
+sessions/
+/sessions/*
+!sessions/.gitkeep
+
+# Cache
+cache/
+/cache/*
+!cache/.gitkeep
+
+# Database
+*.sqlite
+*.db
+
+# OS
+Thumbs.db
+.DS_Store
