@@ -90,7 +90,7 @@ function isStrongPassword($password) {
     $hasUpperCase = preg_match('/[A-Z]/', $password);
     $hasLowerCase = preg_match('/[a-z]/', $password);
     $hasNumber = preg_match('/[0-9]/', $password);
-    $hasSpecialChar = preg_match('/[!@#$%^&*()_+\-=\[\]{};:\'",.<>?]/', $password);
+    $hasSpecialChar = preg_match('/[!@#$%^&*()_+\-=\[\]{};:\'",.<?]/', $password);
     
     return $hasUpperCase && $hasLowerCase && $hasNumber && $hasSpecialChar;
 }
