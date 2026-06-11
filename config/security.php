@@ -4,12 +4,13 @@
  * Yuknet.com - Nakliyeler İlan Sitesi
  */
 
-// Session ayarlarını güvenli hale getir
-session_start();
-ini_set('session.httponly', 1);
-ini_set('session.secure', 1);
-ini_set('session.use_strict_mode', 1);
-ini_set('session.use_only_cookies', 1);
+// Session ayarlarını güvenli hale getir - Sadece aktif değilse başlat
+if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.use_strict_mode', 1);
+    ini_set('session.use_only_cookies', 1);
+    ini_set('session.cookie_httponly', 1);
+    session_start();
+}
 
 // CSRF Token oluştur
 if (empty($_SESSION['csrf_token'])) {
@@ -31,7 +32,7 @@ function getCsrfTokenInput() {
 }
 
 /**
- * Şifre hash oluştur (SHA256 + salt ile)
+ * Şifre hash oluştur (BCRYPT ile)
  */
 function hashPassword($password) {
     return password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
@@ -106,7 +107,9 @@ function isUserLoggedIn() {
  */
 function logout() {
     $_SESSION = [];
-    session_destroy();
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_destroy();
+    }
     setcookie(session_name(), '', time() - 3600, '/');
 }
 
