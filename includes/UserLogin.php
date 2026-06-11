@@ -78,14 +78,14 @@ class UserLogin {
 
             if (!$user) {
                 recordFailedLogin($this->pdo, $email, 'user', 'User not found');
-                $this->errors[] = "Email veya şifre hatalı";
+                $this->errors[] = "Email veya Şifre hatalı";
                 return false;
             }
 
             // Şifreyi doğrula
             if (!verifyPassword($password, $user['password_hash'])) {
                 recordFailedLogin($this->pdo, $email, 'user', 'Invalid password');
-                $this->errors[] = "Email veya şifre hatalı";
+                $this->errors[] = "Email veya Şifre hatalı";
                 return false;
             }
 
@@ -149,7 +149,7 @@ class UserLogin {
     public function changePassword($userId, $oldPassword, $newPassword, $confirmPassword) {
         // Validasyon
         if (strlen($newPassword) < 8) {
-            $this->errors[] = "Yeni şifre en az 8 karakter olmalı";
+            $this->errors[] = "Yeni Şifre en az 8 karakter olmalı";
             return false;
         }
 
@@ -169,7 +169,7 @@ class UserLogin {
             $user = $stmt->fetch();
 
             if (!$user || !verifyPassword($oldPassword, $user['password_hash'])) {
-                $this->errors[] = "Eski şifre hatalı";
+                $this->errors[] = "Eski Şifre hatalı";
                 return false;
             }
 
